@@ -22,7 +22,7 @@
 		<css-grid-item name="console" full-size class="grid-item--console" :style="computedConsoleStyle">
 			<div class="grid-item--wrapper grid-item--wrapper-rounded">
 				<slot name="console" :changeMode="{
-						onModeChange : () => consoleMode = !consoleMode,
+						onModeChange : consoleModeChange,
 						value		 : consoleMode,
 					}
 				"/>
@@ -93,15 +93,11 @@ export default {
 
 		computedRows(){
 			const topPanel = this.computedGrid.topPanel;
-
 			if (!this.consoleMode) {
 				return topPanel + 'vh ' + this.resizerHeight + 'px calc(' + (100 - topPanel) + 'vh - ' +
 					(this.resizerHeight + this.offsetTop) + 'px) 1fr';
 			} else {
-				const t =  'calc(100vh - 146px) ' + this.resizerHeight + 'px ' + '64px' + ' 1fr';
-				console.log(t);
-				return t;
-
+				return 'calc(100vh - 146px) ' + this.resizerHeight + 'px ' + '64px' + ' 1fr';
 			}
 		},
 
@@ -155,12 +151,6 @@ export default {
 		}
 	},
 
-	watch:{
-		consoleMode	: function (val){
-			console.log(val)
-		}
-	},
-
 	data: ()=>({
 		minWidth		: 300,
 		minHeight		: 300,
@@ -170,10 +160,14 @@ export default {
 		padding			: 16,
 		vResize			: false,
 		hResize			: false,
-		consoleMode		: true,
+		consoleMode		: false,
 	}),
 
 	methods:{
+		consoleModeChange(){
+			this.consoleMode = !this.consoleMode;
+		},
+
 		startXResize(e) {
 			this.subscribeEvents();
 			this.hResize	= true;
