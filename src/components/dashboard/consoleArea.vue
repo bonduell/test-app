@@ -11,7 +11,9 @@
 					{{tab.title}}
 				</v-tab>
 			</v-tabs>
-
+			<v-btn icon @click="$emit('change-mode')">
+				<v-icon>{{mini ? 'mdi-window-maximize' : 'mdi-window-minimize'}}</v-icon>
+			</v-btn>
 		</v-toolbar>
 
 		<v-divider/>
@@ -30,7 +32,8 @@ export default {
 	name: "consoleArea.vue",
 
 	props: {
-		id : String,
+		id		: String,
+		mini	: Boolean,
 	},
 
 	components:{
@@ -41,7 +44,6 @@ export default {
 		items : function(){
 			return this.getHistory(this.id);
 		}
-
 	},
 
 	data: () => ({

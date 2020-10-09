@@ -19,7 +19,7 @@
 		</custom-toolbar>
 		<v-divider/>
 
-		<v-card flat style="overflow: hidden;" :style="$store.state.bottom ? 'height: calc(100% - 64px)' : 'height: calc(100vh - 64px)'">
+		<v-card flat style="overflow: hidden;" :style="$store.state.bottom ? 'height: calc(100% - 64px)' : 'height: calc(100vh - 66px)'">
 			<list-view :items="masterList" reverse :substring="input"/>
 		</v-card>
 	</div>

@@ -21,7 +21,11 @@
 
 		<css-grid-item name="console" full-size class="grid-item--console" :style="computedConsoleStyle">
 			<div class="grid-item--wrapper grid-item--wrapper-rounded">
-				<slot name="console"/>
+				<slot name="console" :changeMode="{
+						onModeChange : () => consoleMode = !consoleMode,
+						value		 : consoleMode,
+					}
+				"/>
 			</div>
 		</css-grid-item>
 
@@ -89,8 +93,16 @@ export default {
 
 		computedRows(){
 			const topPanel = this.computedGrid.topPanel;
-			return topPanel + 'vh ' + this.resizerHeight + 'px calc(' + (100 - topPanel) + 'vh - ' +
-				(this.resizerHeight + this.offsetTop) + 'px) 1fr';
+
+			if (!this.consoleMode) {
+				return topPanel + 'vh ' + this.resizerHeight + 'px calc(' + (100 - topPanel) + 'vh - ' +
+					(this.resizerHeight + this.offsetTop) + 'px) 1fr';
+			} else {
+				const t =  'calc(100vh - 146px) ' + this.resizerHeight + 'px ' + '64px' + ' 1fr';
+				console.log(t);
+				return t;
+
+			}
 		},
 
 		computedMasterStyle(){
@@ -115,7 +127,7 @@ export default {
 				top				: `calc(${this.computedGrid.topPanel}vh + ${this.offsetTop + this.resizerHeight}px)`,
 				paddingLeft		: this.bottom || this.layout !== 'left-layout' ? `${this.padding}px` : '',
 				paddingRight	: this.layout === 'left-layout' || this.bottom ? `${this.padding}px` : '',
-				paddingBottom	: `${this.padding}px`,
+				paddingBottom	: this.consoleMode ? `0px` : `${this.padding}px`,
 			}
 		},
 
@@ -143,6 +155,12 @@ export default {
 		}
 	},
 
+	watch:{
+		consoleMode	: function (val){
+			console.log(val)
+		}
+	},
+
 	data: ()=>({
 		minWidth		: 300,
 		minHeight		: 300,
@@ -152,6 +170,7 @@ export default {
 		padding			: 16,
 		vResize			: false,
 		hResize			: false,
+		consoleMode		: true,
 	}),
 
 	methods:{

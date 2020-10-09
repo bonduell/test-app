@@ -8,8 +8,8 @@
 			<slave-area/>
 		</template>
 
-		<template v-slot:console>
-			<router-view/>
+		<template v-slot:console="{ changeMode }">
+			<router-view v-on:change-mode="changeMode.onModeChange()" :mini="changeMode.value"/>
 		</template>
 
 	</dashboard-layout>
@@ -35,6 +35,7 @@ export default {
 	created() {
 		this.$store.dispatch('fetchUsersData');
 	},
+
 }
 </script>
 
