@@ -1,0 +1,60 @@
+<template>
+	<div style="overflow: hidden; height: 100%">
+		<v-toolbar flat align="center">
+			<v-toolbar-title>Favourites</v-toolbar-title>
+			<v-spacer/>
+			<v-text-field v-model="input"
+						  flat
+						  outlined
+						  rounded
+						  dense
+						  label="Search..." append-icon="mdi-magnify"
+						  hide-details
+			/>
+		</v-toolbar>
+
+		<v-divider/>
+
+		<v-card flat style="overflow-y: auto; height: calc(100% - 64px)">
+			<list-view :substring="input"
+				:items="items 	| filterByFieldValue('state', 'favourites')
+								| filterByMatches(counters, input)"
+			/>
+		</v-card>
+
+	</div>
+</template>
+
+<script>
+
+import ListView from "@/components/dashboard/elements/listView";
+import { filterByFieldValue, filterByMatches } from "@/features/filters";
+
+export default {
+	name: "slaveArea.vue",
+
+	components: {
+		ListView,
+	},
+
+	filters: {
+		filterByMatches,
+		filterByFieldValue,
+	},
+
+	computed: {
+		items () {
+			return this.$store.getters.getUserList;
+		},
+	},
+
+	data: () => ({
+		input		: '',
+		counters	: new Map(),
+	})
+}
+
+</script>
+
+<style scoped>
+</style>

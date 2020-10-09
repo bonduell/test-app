@@ -1,0 +1,17 @@
+@import '~vuetify/src/styles/styles.sass';
+
+$material-light : map-merge($material-light, (
+        "grid-item" : (
+            "background" : map-get($grey, 'lighten-3'),
+            "box-shadow" : map-get($grey, 'lighten-2'),
+        )
+    )
+);
+
+$material-dark 	: map-merge($material-dark, (
+        "grid-item" : (
+            "background" : map-get($material-dark-elevation-colors, '4'),
+            "box-shadow" : map-get($material-dark-elevation-colors, '8')
+        )
+    )
+);
