@@ -1,5 +1,5 @@
 <template>
-	<div style="overflow: hidden; height: 100%">
+	<div class="fill-height">
 		<v-toolbar flat align="center">
 			<v-toolbar-title>Favourites</v-toolbar-title>
 			<v-spacer/>
@@ -15,7 +15,7 @@
 
 		<v-divider/>
 
-		<v-card flat style="overflow-y: auto; height: calc(100% - 64px)">
+		<v-card flat style="height: calc(100% - 65px)">
 			<list-view :substring="input"
 				:items="items 	| filterByFieldValue('state', 'favourites')
 								| filterByMatches(counters, input)"

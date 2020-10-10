@@ -1,5 +1,5 @@
 <template>
-	<div style="overflow: hidden; height: 100%">
+	<div class="fill-height">
 		<v-toolbar flat>
 			<v-tabs>
 				<v-tab v-for="(tab, idx) in tabs"
@@ -12,7 +12,7 @@
 				</v-tab>
 			</v-tabs>
 			<v-btn icon @click="$emit('change-mode')">
-				<v-icon>{{mini ? 'mdi-window-maximize' : 'mdi-window-minimize'}}</v-icon>
+				<v-icon small>{{mini ? 'mdi-window-maximize' : 'mdi-window-minimize'}}</v-icon>
 			</v-btn>
 		</v-toolbar>
 

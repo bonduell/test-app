@@ -1,5 +1,5 @@
 <template>
-	<div style="overflow: hidden; height: 100%">
+	<div class="fill-height">
 		<custom-toolbar title="Common" :app="!$store.state.bottom" key="toolbar">
 			<template v-slot:search>
 				<v-row no-gutters align="center" style="flex-wrap: nowrap">
@@ -19,7 +19,7 @@
 		</custom-toolbar>
 		<v-divider/>
 
-		<v-card flat style="overflow: hidden;" :style="$store.state.bottom ? 'height: calc(100% - 64px)' : 'height: calc(100vh - 66px)'">
+		<v-card flat :style="$store.state.bottom ? 'height: calc(100% - 65px)' : 'height: calc(100vh - 65px)'">
 			<list-view :items="masterList" reverse :substring="input"/>
 		</v-card>
 	</div>

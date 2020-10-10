@@ -22,8 +22,8 @@
 		<css-grid-item name="console" full-size class="grid-item--console" :style="computedConsoleStyle">
 			<div class="grid-item--wrapper grid-item--wrapper-rounded">
 				<slot name="console" :changeMode="{
-						onModeChange : consoleModeChange,
-						value		 : consoleMode,
+						onModeChange : consoleMinimizeChange,
+						value		 : consoleMinimize,
 					}
 				"/>
 			</div>
@@ -54,9 +54,9 @@
 			<v-hover v-slot:default="{ hover }" open-delay="150">
 				<v-row no-gutters justify="center" align="center"
 					   class="resizer-horizontal"
-					   :class="hResize || hover  ? `resizer-horizontal--active` : ''"
+					   :class="(hResize || hover) && !consoleMinimize ? `resizer-horizontal--active` : ''"
 				>
-					<v-icon :size="resizerHeight">mdi-drag-horizontal</v-icon>
+					<v-icon v-show="!consoleMinimize" :size="resizerHeight">mdi-drag-horizontal</v-icon>
 				</v-row>
 			</v-hover>
 		</css-grid-item>
@@ -93,7 +93,7 @@ export default {
 
 		computedRows(){
 			const topPanel = this.computedGrid.topPanel;
-			if (!this.consoleMode) {
+			if (!this.consoleMinimize) {
 				return topPanel + 'vh ' + this.resizerHeight + 'px calc(' + (100 - topPanel) + 'vh - ' +
 					(this.resizerHeight + this.offsetTop) + 'px) 1fr';
 			} else {
@@ -123,14 +123,12 @@ export default {
 				top				: `calc(${this.computedGrid.topPanel}vh + ${this.offsetTop + this.resizerHeight}px)`,
 				paddingLeft		: this.bottom || this.layout !== 'left-layout' ? `${this.padding}px` : '',
 				paddingRight	: this.layout === 'left-layout' || this.bottom ? `${this.padding}px` : '',
-				paddingBottom	: this.consoleMode ? `0px` : `${this.padding}px`,
+				paddingBottom	: this.consoleMinimize ? `0px` : `${this.padding}px`,
 			}
 		},
 
 		computedHResizerStyle(){
 			return {
-				marginTop		: '1px',
-				marginBottom	: '1px',
 				position		: 'sticky',
 				top				: `calc(${this.computedGrid.topPanel}vh + ${this.offsetTop}px)`,
 				paddingRight	: this.layout === "left-layout" || this.bottom ? `${this.padding}px` : '',
@@ -140,8 +138,6 @@ export default {
 
 		computedVResizerStyle(){
 			return {
-				marginLeft		: '1px',
-				marginRight		: '1px',
 				paddingTop		: this.bottom ? `${this.padding}px` : '',
 			}
 		},
@@ -160,15 +156,16 @@ export default {
 		padding			: 16,
 		vResize			: false,
 		hResize			: false,
-		consoleMode		: false,
+		consoleMinimize		: false,
 	}),
 
 	methods:{
-		consoleModeChange(){
-			this.consoleMode = !this.consoleMode;
+		consoleMinimizeChange(){
+			this.consoleMinimize = !this.consoleMinimize;
 		},
 
 		startXResize(e) {
+			if (this.consoleMinimize) { return }
 			this.subscribeEvents();
 			this.hResize	= true;
 			this.screenY	= e.screenY;
@@ -271,7 +268,7 @@ export default {
 .grid-item--wrapper
 	height 			: 100%
 	width 			: 100%
-	overflow-y 		: auto
+	overflow 		: hidden
 
 	&-rounded
 		border-radius 	: 4px
@@ -280,12 +277,18 @@ export default {
 	height 			: 100%
 	cursor 			: col-resize
 	transition 		: background-color 200ms ease 0s, box-shadow 200ms ease 0s
+	z-index 		: -1
+	margin-left 	: 1px
+	margin-right 	: 1px
 
 	&--icon-fixed
 		position	: fixed
 
 .resizer-horizontal
+	margin-top  	: 1px
+	margin-bottom   : 1px
 	cursor 			: row-resize
 	transition 		: background-color 200ms ease 0s, box-shadow 200ms ease 0s
+	z-index 		: -1
 
 </style>

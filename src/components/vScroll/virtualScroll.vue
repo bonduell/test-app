@@ -11,14 +11,22 @@
 				  :index="index"
 			/>
 		</div>
+		<app-fab :top="offsetTop" :action="goToTop"/>
 	</div>
 </template>
 
 <script>
-import {ref, computed, watch, onBeforeUnmount, onMounted, watchEffect} from "@vue/composition-api"
+
+import { ref, computed, watch, onBeforeUnmount, onMounted, watchEffect } from "@vue/composition-api"
+import AppFab from "@/components/common/appfab";
 
 export default {
 	name: "virtualScroll.vue",
+
+	components:{
+		AppFab,
+	},
+
 	props: {
 		items		: {
 			type	: Array,
@@ -96,7 +104,7 @@ export default {
 			container.value.addEventListener('scroll', onScroll);
 		})
 
-		return { virtualList, container, viewport, viewportHeight }
+		return { virtualList, container, viewport, viewportHeight, offsetTop, goToTop }
 	}
 
 }
