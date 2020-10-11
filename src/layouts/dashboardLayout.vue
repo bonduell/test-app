@@ -163,6 +163,10 @@ export default {
 	methods:{
 		consoleMinimizeChange(){
 			this.consoleMinimize = !this.consoleMinimize;
+			setTimeout(() => {
+				window.dispatchEvent(new Event('resize'));
+				this.$forceUpdate();
+			}, 0)
 		},
 
 		startXResize(e) {
