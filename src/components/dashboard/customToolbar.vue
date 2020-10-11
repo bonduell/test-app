@@ -90,9 +90,9 @@ export default Vue.extend({
 
 		setScrollbarTheme(val){
 			if (val){
-				document.documentElement.classList.add('scrollbar-dark')
+				document.documentElement.classList.add('scrollbar--dark')
 			} else {
-				document.documentElement.classList.remove('scrollbar-dark');
+				document.documentElement.classList.remove('scrollbar--dark');
 			}
 		}
 	},
@@ -103,23 +103,24 @@ export default Vue.extend({
 
 <style lang="sass">
 
-.scrollbar-dark
-	::-webkit-scrollbar
-		width: 8px
-		height: 3px
-	::-webkit-scrollbar-button
-		background-color: #666
-	::-webkit-scrollbar-track
-		background-color: #646464
-	::-webkit-scrollbar-track-piece
-		background-color: #1E1E1E
-	::-webkit-scrollbar-thumb
-		height: 50px
-		background-color: #666
-		border-radius: 3px
-	::-webkit-scrollbar-corner
-		background-color: #646464
-	::-webkit-resizer
-		background-color: #666
+.scrollbar
+	&--dark
+		::-webkit-scrollbar
+			width: 8px
+			height: 3px
+		::-webkit-scrollbar-button
+			background-color: #666
+		::-webkit-scrollbar-track
+			background-color: #646464
+		::-webkit-scrollbar-track-piece
+			background-color: #1E1E1E
+		::-webkit-scrollbar-thumb
+			height: 50px
+			background-color: #666
+			border-radius: 3px
+		::-webkit-scrollbar-corner
+			background-color: #646464
+		::-webkit-resizer
+			background-color: #666
 
 </style>

@@ -15,12 +15,15 @@
 						<v-icon :color="state.sortByAsc ? 'primary' : ''" small>mdi-sort</v-icon>
 					</v-btn>
 				</v-row>
+				<v-progress-linear :value="progress" absolute height="3"
+								   style="top:62px; left: 0"
+				/>
 			</template>
 		</custom-toolbar>
 		<v-divider/>
 
 		<v-card flat :style="$store.state.bottom ? 'height: calc(100% - 65px)' : 'height: calc(100vh - 65px)'">
-			<list-view :items="masterList" reverse :substring="input"/>
+			<list-view :items="masterList" reverse :substring="input" v-on:progress="e => progress = e"/>
 		</v-card>
 	</div>
 </template>
@@ -29,7 +32,7 @@
 
 import ListView from "./elements/listView";
 import CustomToolbar from "./customToolbar";
-import { reactive } from "@vue/composition-api";
+import { reactive, ref } from "@vue/composition-api";
 import { sortByAsc, sortByDesc } from "@/features/sorters";
 import { filterByMatches, filterByFieldValue } from "@/features/filters";
 import useCustomHandlers from "../../features/useCustomHandlers";
@@ -44,7 +47,7 @@ export default {
 
 	setup(props, { root }) {
 		const state = reactive({ sortByAsc : false, });
-
+		const progress = ref(0);
 		const { input, masterList } = useCustomHandlers(root.$store.getters.getUserList, () => computedHandlers()),
 
 		/**
@@ -57,9 +60,8 @@ export default {
 				(arr, counters) => state.sortByAsc ? sortByAsc(arr, counters) : sortByDesc(arr, counters),
 			];
 
-		return { input, masterList, state };
+		return { input, masterList, state, progress };
 	},
-
 }
 
 </script>

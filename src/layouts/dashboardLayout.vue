@@ -1,5 +1,6 @@
 <template>
 	<css-grid ref="main-grid" full-size
+			  style="transition: all ease-out 0.3s"
 			  :grid-rows	= "computedRows"
 			  :grid-columns	= "computedColumns"
 			  :grid-areas	= "computedGrid.template"

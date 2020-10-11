@@ -11,12 +11,17 @@
 						  label="Search..." append-icon="mdi-magnify"
 						  hide-details
 			/>
+			<v-progress-linear :value="progress" absolute height="3"
+							   style="top:62px; left: 0"
+			/>
+
 		</v-toolbar>
 
 		<v-divider/>
 
 		<v-card flat style="height: calc(100% - 65px)">
-			<list-view :substring="input"
+			<list-view v-on:progress="e => progress = e"
+				:substring="input"
 				:items="items 	| filterByFieldValue('state', 'favourites')
 								| filterByMatches(counters, input)"
 			/>
@@ -51,6 +56,7 @@ export default {
 	data: () => ({
 		input		: '',
 		counters	: new Map(),
+		progress	: 0,
 	})
 }
 

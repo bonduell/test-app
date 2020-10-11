@@ -5,6 +5,8 @@
 		item-height="324"
 		bench="2"
 		:input="substring"
+		progress
+		v-on:progress="e => $emit('progress', e)"
 	>
 		<template v-slot="{ item, index }">
 			<v-hover v-slot:default="{ hover }" :key="index" open-delay="300" close-delay="200">
@@ -75,7 +77,6 @@ export default {
 	props: {
 		items		: Array,
 		reverse 	: Boolean,
-
 		substring	: {
 			type	: String,
 			default : '',

@@ -46,7 +46,9 @@ export default {
 		input		: {
 			type	: String,
 			default	: '',
-		}
+		},
+
+		progress	: Boolean,
 	},
 
 /** todo refactor the code bellow, add dynamic height for items **/
@@ -91,6 +93,11 @@ export default {
 
 		watchEffect(()=>{
 			props.input && goToTop();
+		})
+
+		props.progress && watchEffect( ()=>{
+			const max = viewportHeight.value - virtualHeight.value;
+			context.emit('progress', offsetTop.value * 100 / max);
 		})
 
 		onMounted(()=>{

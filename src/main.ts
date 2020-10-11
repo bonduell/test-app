@@ -8,19 +8,6 @@ import VueCompositionAPI from '@vue/composition-api'
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 
-/*
-declare global {
-    interface Array<T> {
-        pipeline(Array: T): Array<T>
-    }
-}
-
-Array.prototype.pipeline = function( callback: any ) {
-    return callback(this);
-}
-
-*/
-
 new Vue({
     router,
     store,
