@@ -97,7 +97,11 @@ export default {
 
 		props.progress && watchEffect( ()=>{
 			const max = viewportHeight.value - virtualHeight.value;
-			context.emit('progress', offsetTop.value * 100 / max);
+			const res = (virtualHeight.value > viewportHeight.value) && props.items.length > 0
+				? 100
+				: offsetTop.value * 100 / max;
+
+			context.emit('progress', res);
 		})
 
 		onMounted(()=>{

@@ -11,8 +11,8 @@
 						  label="Search..." append-icon="mdi-magnify"
 						  hide-details
 			/>
-			<v-progress-linear :value="progress" absolute height="3"
-							   style="top:62px; left: 0"
+			<v-progress-linear :value="progress" absolute height="2"
+							   style="top:63px; left: 0"
 			/>
 
 		</v-toolbar>

@@ -15,8 +15,8 @@
 						<v-icon :color="state.sortByAsc ? 'primary' : ''" small>mdi-sort</v-icon>
 					</v-btn>
 				</v-row>
-				<v-progress-linear :value="progress" absolute height="3"
-								   style="top:62px; left: 0"
+				<v-progress-linear :value="progress" absolute height="2"
+								   style="top:63px; left: 0"
 				/>
 			</template>
 		</custom-toolbar>
