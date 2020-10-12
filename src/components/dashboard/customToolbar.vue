@@ -79,6 +79,7 @@ export default Vue.extend({
 	},
 
 	mounted() {
+		document.documentElement.classList.add('scrollbar')
 		this.setScrollbarTheme(this.$vuetify.theme.dark);
 	},
 
@@ -104,10 +105,25 @@ export default Vue.extend({
 <style lang="sass">
 
 .scrollbar
+	::-webkit-scrollbar
+		width: 8px
+		height: 3px
+	::-webkit-scrollbar-button
+		background-color: #f7f7f7
+	::-webkit-scrollbar-track
+		background-color: #f7f7f7
+	::-webkit-scrollbar-track-piece
+		background-color: white
+	::-webkit-scrollbar-thumb
+		height: 50px
+		background-color: lightgrey
+		border-radius: 3px
+	::-webkit-scrollbar-corner
+		background-color: #f7f7f7
+	::-webkit-resizer
+		background-color: #f7f7f7
+
 	&--dark
-		::-webkit-scrollbar
-			width: 8px
-			height: 3px
 		::-webkit-scrollbar-button
 			background-color: #666
 		::-webkit-scrollbar-track

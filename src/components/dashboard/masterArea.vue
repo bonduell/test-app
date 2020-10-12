@@ -46,15 +46,16 @@ export default {
 	},
 
 	setup(props, { root }) {
-		const state = reactive({ sortByAsc : false, });
-		const progress = ref(0);
-		const { input, masterList } = useCustomHandlers(root.$store.getters.getUserList, () => computedHandlers()),
+		const
+			state = reactive({ sortByAsc : false, }),
+			progress = ref(0),
+			{ input, masterList } = useCustomHandlers(root.$store.getters.getUserList, () => computedHandlers()),
 
-		/**
-		 *  здесь можно менять обработчики динамически в зависимости от
-		 *  выбранного пользователем режима. На примере sortByAsc/sortByDesc
-		 **/
-		computedHandlers = () => [
+			/**
+			 *  здесь можно менять обработчики динамически в зависимости от
+			 *  выбранного пользователем режима. На примере sortByAsc/sortByDesc
+			 **/
+			computedHandlers = () => [
 				(arr) => filterByFieldValue(arr, 'state', 'common'),
 				(arr, counters, input) => filterByMatches(arr, counters, input),
 				(arr, counters) => state.sortByAsc ? sortByAsc(arr, counters) : sortByDesc(arr, counters),
