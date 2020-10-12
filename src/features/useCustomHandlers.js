@@ -1,4 +1,4 @@
-import { computed, ref, watch } from "@vue/composition-api";
+import { computed, ref } from "@vue/composition-api";
 
 export default function (items, handlers){
 	const

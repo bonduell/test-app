@@ -39,7 +39,9 @@
 								class="ml-6"
 								style="background-color: orange; cursor: pointer"
 							>
-								<span class="display-1 font-weight-bold text--white" v-text="item.name.split('')[0]"/>
+								<span class="display-1 font-weight-bold text--white"
+									  v-text="item.firstname.split('')[0] + item.lastname.split('')[0]"
+								/>
 							</v-avatar>
 						</v-col>
 

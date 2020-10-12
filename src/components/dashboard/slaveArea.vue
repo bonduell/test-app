@@ -22,8 +22,9 @@
 		<v-card flat style="height: calc(100% - 65px)">
 			<list-view v-on:progress="e => progress = e"
 				:substring="input"
-				:items="items 	| filterByFieldValue('state', 'favourites')
-								| filterByMatches(counters, input)"
+				:items="items	| filterByFieldValue('state', 'favourites')
+								| filterByMatches(counters, input)
+								| sortByAsc(counters)"
 			/>
 		</v-card>
 
@@ -34,6 +35,7 @@
 
 import ListView from "@/components/dashboard/elements/listView";
 import { filterByFieldValue, filterByMatches } from "@/features/filters";
+import { sortByAsc } from "@/features/sorters";
 
 export default {
 	name: "slaveArea.vue",
@@ -45,6 +47,7 @@ export default {
 	filters: {
 		filterByMatches,
 		filterByFieldValue,
+		sortByAsc,
 	},
 
 	computed: {
