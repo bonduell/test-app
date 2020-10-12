@@ -14,7 +14,7 @@
 				</v-list-item-subtitle>
 			</v-list-item-content>
 			<v-list-item-action>
-				<span>{{item.timestamp}}</span>
+				<span>{{getDateString(item.timestamp)}}</span>
 			</v-list-item-action>
 		</v-list-item>
 	</section>
@@ -26,6 +26,13 @@ export default {
 	props: {
 		items: Array,
 	},
+
+	methods:{
+		getDateString(value){
+			const time = new Date(value);
+			return `${time.getHours()}h : ${time.getMinutes()}m : ${time.getSeconds()}s`;
+		}
+	}
 }
 </script>
 

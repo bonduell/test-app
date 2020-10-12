@@ -4,7 +4,7 @@ interface IHistory {
 	id			: Number,
 	name		: String,
 	state		: String,
-	timestamp	: String,
+	timestamp	: Number,
 }
 
 interface IUserItem {
@@ -62,12 +62,11 @@ class User implements IUser {
 	}
 
 	private onStateChange(newState: any) : void {
-		const time = new Date(Date.now());
 		this.history.push( <IHistory> {
 			id			: this.id,
 			name		: this.name,
 			state		: newState,
-			timestamp	: `${time.getHours()}h : ${time.getMinutes()}m : ${time.getSeconds()}s`,
+			timestamp	: Date.now(),
 		})
 	}
 }
