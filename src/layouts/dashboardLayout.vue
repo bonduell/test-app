@@ -134,12 +134,16 @@ export default {
 				top				: `calc(${this.computedGrid.topPanel}vh + ${this.offsetTop}px)`,
 				paddingRight	: this.layout === "left-layout" || this.bottom ? `${this.padding}px` : '',
 				paddingLeft		: this.layout !== "left-layout" || this.bottom ? `${this.padding}px` : '',
+				paddingTop		: `1px`,
+				paddingBottom	: `1px`,
 			}
 		},
 
 		computedVResizerStyle(){
 			return {
 				paddingTop		: this.bottom ? `${this.padding}px` : '',
+				paddingLeft		: `1px`,
+				paddingRight	: `1px`,
 			}
 		},
 
@@ -282,18 +286,12 @@ export default {
 	height 			: 100%
 	cursor 			: col-resize
 	transition 		: background-color 200ms ease 0s, box-shadow 200ms ease 0s
-	z-index 		: -1
-	margin-left 	: 1px
-	margin-right 	: 1px
 
 	&--icon-fixed
 		position	: fixed
 
 .resizer-horizontal
-	margin-top  	: 1px
-	margin-bottom   : 1px
 	cursor 			: row-resize
 	transition 		: background-color 200ms ease 0s, box-shadow 200ms ease 0s
-	z-index 		: -1
 
 </style>
