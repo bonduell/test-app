@@ -161,16 +161,18 @@ export default {
 		padding			: 16,
 		vResize			: false,
 		hResize			: false,
-		consoleMinimize		: false,
+		consoleMinimize	: false,
 	}),
 
 	methods:{
 		consoleMinimizeChange(){
 			this.consoleMinimize = !this.consoleMinimize;
-			setTimeout(() => {
-				window.dispatchEvent(new Event('resize'));
-				this.$forceUpdate();
-			}, 0)
+			this.$nextTick(() => this.resizeNotify());
+		},
+
+		resizeNotify(){
+			window.dispatchEvent(new Event('resize'));
+			this.$forceUpdate();
 		},
 
 		startXResize(e) {
@@ -221,6 +223,7 @@ export default {
 				if ((this.leftWidth - offset >= this.minWidth) && (this.mainGrid.$el.clientWidth + offset - this.leftWidth > this.minWidth)){
 					this.computedGrid.leftPanel = leftPanel;
 				}
+				this.resizeNotify();
 			}
 
 			if (this.hResize) {
@@ -229,10 +232,8 @@ export default {
 				if ((this.topHeight - offset >= this.minHeight) && (window.innerHeight + offset - this.topHeight > this.minHeight)){
 					this.computedGrid.topPanel = topPanel;
 				}
+				this.resizeNotify();
 			}
-
-			window.dispatchEvent(new Event('resize'));
-			this.$forceUpdate();
 		},
 
 	},
